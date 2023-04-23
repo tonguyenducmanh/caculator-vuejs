@@ -5,9 +5,18 @@ caculator clone */
     <div class="td-control">
       <template v-for="controlButton in controlButtons" :key="controlButton.key">
         <TDButton
+          v-if="currentActiveButton == controlButton.buttonName"
           :buttonType="controlButton.buttonType"
           :keyWord="controlButton.buttonName"
           :size="controlButton.size"
+          :buttonActive="true"
+        />
+        <TDButton
+          v-else
+          :buttonType="controlButton.buttonType"
+          :keyWord="controlButton.buttonName"
+          :size="controlButton.size"
+          @active-this-button="changeActiveButton"
         />
       </template>
     </div>
@@ -23,13 +32,21 @@ export default {
   },
   data() {
     return {
-      controlButtons: controlConfig
+      controlButtons: controlConfig,
+      currentActiveButton: null // tên của nút hiện tại đang active
     }
   },
-  mounted() {
-    let me = this
-  },
-  props: {}
+  mounted() {},
+  created() {},
+  props: {},
+  methods: {
+    /**
+     * thay đổi nút hiện tại đang active
+     */
+    changeActiveButton(value) {
+      this.currentActiveButton = value
+    }
+  }
 }
 </script>
 <style>

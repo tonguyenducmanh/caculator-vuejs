@@ -4,6 +4,7 @@ chương trình */
   <div
     v-if="buttonType == enumeration.buttonType.Number && size == enumeration.buttonSize.Normal"
     class="td-button-container td-button-common"
+    @click="typeNumber"
   >
     <!-- loại nút nhập số -->
     <div class="td-button">
@@ -13,6 +14,7 @@ chương trình */
   <div
     v-else-if="buttonType == enumeration.buttonType.Number && size == enumeration.buttonSize.Double"
     class="td-button-container td-button-common td-button-common-double"
+    @click="typeNumber"
   >
     <!-- loại nút nhập số -->
     <div class="td-button">
@@ -22,6 +24,8 @@ chương trình */
   <div
     v-else-if="buttonType == enumeration.buttonType.SimpleFunction"
     class="td-button-container td-button-simple-function"
+    @click="typeSimpleFunction"
+    :class="buttonActive == true ? 'td-button-simple-function-active' : ''"
   >
     <!-- loại nút chức năng cơ bản -->
     <div class="td-button">
@@ -31,6 +35,8 @@ chương trình */
   <div
     v-else-if="buttonType == enumeration.buttonType.Caculate"
     class="td-button-container td-button-simple-function"
+    @click="typeCalulate"
+    :class="buttonActive == true ? 'td-button-simple-function-active' : ''"
   >
     <!-- loại nút tính toán -->
     <div class="td-button">
@@ -40,6 +46,7 @@ chương trình */
   <div
     v-else-if="buttonType == enumeration.buttonType.Comma"
     class="td-button-container td-button-common"
+    @click="typeComma"
   >
     <!-- loại nút dấu phẩy -->
     <div class="td-button">
@@ -49,6 +56,7 @@ chương trình */
   <div
     v-else-if="buttonType == enumeration.buttonType.Other"
     class="td-button-container td-button-other"
+    @click="typeOther"
   >
     <!-- loại nút tính năng khác -->
     <div class="td-button">
@@ -67,17 +75,92 @@ export default {
     }
   },
   props: {
+    // từ khóa của nút
     keyWord: {
       type: String,
       default: '0'
     },
+    // kiểu nút
     buttonType: {
       type: Number,
-      default: 0
+      default: enumeration.buttonType.Number
     },
+    // kích cỡ của nút
     size: {
       type: Number,
-      default: 0
+      default: enumeration.buttonType.Normal
+    },
+    // trạng thái đã ấn của nút chức năng
+    buttonActive: {
+      type: Boolean,
+      default: false
+    }
+  },
+  mounted() {},
+  created() {},
+  methods: {
+    /**
+     * gọi tới function nhập số của tdmain.vue
+     */
+    typeNumber() {
+      let me = this
+      if (
+        me.keyWord &&
+        me.$parent &&
+        me.$parent.$parent &&
+        typeof me.$parent.$parent.typeNumber == 'function'
+      ) {
+        me.$parent.$parent.typeNumber(me.keyWord)
+      }
+    },
+    /**
+     * gọi tới function nhập dấu phép tính của tdmain.vue
+     */
+    typeSimpleFunction() {
+      let me = this
+      if (
+        me.keyWord &&
+        me.$parent &&
+        me.$parent.$parent &&
+        typeof me.$parent.$parent.typeSimpleFunction == 'function'
+      ) {
+        me.$parent.$parent.typeSimpleFunction(me.keyWord)
+        me.$emit('activeThisButton', me.keyWord)
+      }
+    },
+    /**
+     * gọi tới function tính toán của tdmain.vue
+     */
+    typeCalulate() {
+      let me = this
+      if (
+        me.$parent &&
+        me.$parent.$parent &&
+        typeof me.$parent.$parent.typeCalulate == 'function'
+      ) {
+        me.$parent.$parent.typeCalulate()
+        me.$emit('activeThisButton', me.keyWord)
+      }
+    },
+    /**
+     * gọi tới method thêm dấu phẩy
+     */
+    typeComma() {
+      let me = this
+      if (me.$parent && me.$parent.$parent && typeof me.$parent.$parent.typeComma == 'function') {
+        me.$parent.$parent.typeComma()
+        me.$emit('activeThisButton', null)
+      }
+    },
+    /**
+     * gọi tới các tính năng khác của máy tính
+     */
+    typeOther() {
+      let me = this
+      if (me.$parent && me.$parent.$parent && typeof me.$parent.$parent.typeOther == 'function') {
+        me.$parent.$parent.typeOther(me.keyWord)
+        me.$emit('activeThisButton', null)
+      }
     }
   }
 }
@@ -109,21 +192,18 @@ export default {
 }
 .td-button-simple-function {
   background-color: #ff930e;
-  color: white;
 }
 .td-button-simple-function:hover {
   background-color: #ffb050;
-  color: white;
 }
-.td-button-simple-function:active {
-  background-color: #f1911d;
-  color: white;
+.td-button-simple-function-active {
+  background-color: white;
 }
-.td-button-caculate {
-  background-color: #ffffff;
-}
-.td-button-caculate .td-button {
+.td-button-simple-function-active .td-button {
   color: #ff930e;
+}
+.td-button-simple-function-active:hover {
+  background-color: white;
 }
 .td-button-other {
   background-color: #b1b1b1;
