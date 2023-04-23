@@ -29,8 +29,22 @@ export default {
     Comma: 4, // kiểu dấu phẩy
     Other: 5 // các kiểu tính toán khác
   },
+  //kích cỡ của nút
   buttonSize: {
     Normal: 1, // kiểu bình thường, độ rộng bằng độ cao
     Double: 2 // kiểu rộng chiếm 2 ô
+  },
+  //trạng thái nhập hiện tại
+  state: {
+    typeOne: 1, // đang nhập số thứ nhất
+    typeTwo: 2 // đang nhập số thứ hai
+  },
+  // dấu của phép tính hiện tại
+  calculationSign: {
+    NotSet: 1, // không thiết lập
+    Plus: 2, // cộng
+    Minus: 3, // trừ
+    Multiple: 4, // nhân
+    Divide: 5 // chia
   }
 }

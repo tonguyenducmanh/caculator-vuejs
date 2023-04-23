@@ -1,19 +1,29 @@
 /** * màn hình hiển thị kết quả * created by : tdmanh1 23/04/2023 thi công màn hình kết quả iphone
 caculator clone */
 <template>
-  <div class="td-result">
+  <div class="td-result" @click="removeOneChar">
     <div class="td-result-number">{{ finalResult }}</div>
   </div>
 </template>
 <script>
 export default {
   name: 'TDResult',
-  data() {
-    return {
-      finalResult: 0
+  props: {
+    finalResult: {
+      type: Number,
+      default: 0
     }
   },
-  props: {}
+  mounted() {},
+  created() {},
+  methods: {
+    removeOneChar() {
+      let me = this
+      if (me.$parent && typeof me.$parent.removeOneChar == 'function') {
+        me.$parent.removeOneChar()
+      }
+    }
+  }
 }
 </script>
 <style>
