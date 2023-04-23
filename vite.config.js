@@ -7,6 +7,7 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   resolve: {
+    //thay thế import bằng @ là đường dẫn tới thư mục src
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
