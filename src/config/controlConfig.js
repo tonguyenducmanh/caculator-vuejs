@@ -58,13 +58,13 @@ export default [
   },
   {
     buttonType: enumeration.buttonType.Number,
-    buttonName: enumeration.buttonName.Six,
+    buttonName: enumeration.buttonName.Five,
     key: 10,
     size: enumeration.buttonSize.Normal
   },
   {
     buttonType: enumeration.buttonType.Number,
-    buttonName: enumeration.buttonName.Five,
+    buttonName: enumeration.buttonName.Six,
     key: 11,
     size: enumeration.buttonSize.Normal
   },
