@@ -1,11 +1,13 @@
 <template>
-  <div class="td-history" 
-       ref="historyContainer"
-       @mousedown="startDrag"
-       @mousemove="handleDrag" 
-       @mouseup="stopDrag"
-       @mouseleave="stopDrag"
-       :class="{ 'dragging': isDragging }">
+  <div
+    class="td-history"
+    ref="historyContainer"
+    @mousedown="startDrag"
+    @mousemove="handleDrag"
+    @mouseup="stopDrag"
+    @mouseleave="stopDrag"
+    :class="{ dragging: isDragging }"
+  >
     <div class="td-history-list">
       <div v-for="(item, index) in history" :key="index" class="td-history-item">
         <span class="td-history-expression">{{ item.expression }}</span>
@@ -40,7 +42,7 @@ export default {
     },
     handleDrag(event) {
       if (!this.isDragging) return
-      
+
       event.preventDefault()
       const deltaY = this.startY - event.pageY
       this.$refs.historyContainer.scrollTop = this.scrollTop + deltaY
@@ -58,6 +60,7 @@ export default {
   width: 100%;
   height: 150px;
   overflow-y: auto;
+  overflow-x: auto;
   padding: 10px;
   cursor: grab;
   user-select: none;
@@ -76,8 +79,6 @@ export default {
 .td-history-item {
   font-size: 16px;
   color: rgba(255, 255, 255, 0.8);
-  display: flex;
-  justify-content: flex-end;
   gap: 8px;
 }
 

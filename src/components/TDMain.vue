@@ -69,18 +69,16 @@ export default {
      * hàm thực hiện thêm 1 số vào đằng sau giá trị đang hiển thị trên màn hình
      */
     concatNumber(value, target) {
-      if (target.toString() && target.toString().length <= 6) {
-        if (target.toString() == '0') {
-          //nếu số hiện tại là số 0 thì chỉ việc thay thế nó bằng số mới
-          target = Number(value)
-        } else if (target.toString().includes('.0')) {
-          target = Number(
-            target.toString().substring(0, target.toString().length - 1) + value.toString()
-          )
-        } else {
-          // nếu số hiện tại không phải số 0 thì cộng chuỗi
-          target = Number(target.toString() + value.toString())
-        }
+      if (target.toString() == '0') {
+        //nếu số hiện tại là số 0 thì chỉ việc thay thế nó bằng số mới
+        target = Number(value)
+      } else if (target.toString().includes('.0')) {
+        target = Number(
+          target.toString().substring(0, target.toString().length - 1) + value.toString()
+        )
+      } else {
+        // nếu số hiện tại không phải số 0 thì cộng chuỗi
+        target = Number(target.toString() + value.toString())
       }
       return target
     },
