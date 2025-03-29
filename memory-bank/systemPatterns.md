@@ -6,6 +6,7 @@ graph TD
     A[App.vue] --> B[TDMain.vue]
     B --> C[TDResult.vue]
     B --> D[TDControl.vue]
+    B --> H[TDHistory.vue]
     D --> E[TDButton.vue]
     F[controlConfig.js] --> D
     G[enumeration.js] --> B
@@ -34,6 +35,14 @@ graph TD
 5. **TDButton.vue**
    - Component cơ bản cho các nút
    - Có 2 kích thước: Normal và Double
+
+6. **TDHistory.vue**
+   - Hiển thị lịch sử tính toán
+   - Hỗ trợ cuộn chuột và kéo thả
+   - Sử dụng Drag and Drop Pattern để xử lý kéo thả:
+     * mousedown: Bắt đầu kéo
+     * mousemove: Tính toán vị trí cuộn
+     * mouseup/mouseleave: Kết thúc kéo
 
 ## Event Flow
 ```mermaid

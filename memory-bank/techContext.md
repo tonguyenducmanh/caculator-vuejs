@@ -9,6 +9,7 @@ src/
 │   ├── TDMain.vue     # Component chính của máy tính
 │   ├── TDControl.vue  # Phần điều khiển (các nút)
 │   ├── TDResult.vue   # Phần hiển thị kết quả
+│   ├── TDHistory.vue  # Phần hiển thị lịch sử tính toán
 │   └── TDButton.vue   # Component nút bấm
 ├── config/
 │   └── controlConfig.js # Cấu hình cho các nút
@@ -41,6 +42,16 @@ src/
   - nextNumber: Số thứ hai của phép tính
   - state: Trạng thái đang nhập (số 1 hay số 2)
   - calculationSign: Dấu của phép tính hiện tại
+
+## Drag and Drop Implementation
+- Sử dụng native DOM events để xử lý kéo thả:
+  - mousedown: Khởi tạo trạng thái kéo
+  - mousemove: Tính toán độ dịch chuyển và cập nhật scrollTop
+  - mouseup/mouseleave: Kết thúc trạng thái kéo
+- State cho kéo thả:
+  - isDragging: Trạng thái đang kéo
+  - startY: Vị trí Y bắt đầu kéo
+  - scrollTop: Vị trí cuộn hiện tại
 
 ## Data Persistence
 - Sử dụng sessionStorage để lưu kết quả tính toán cuối cùng

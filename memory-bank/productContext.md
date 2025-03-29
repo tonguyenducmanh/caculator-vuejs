@@ -36,3 +36,4 @@ Clone lại ứng dụng máy tính của iPhone để:
    - Tính phần trăm
    - Đổi dấu số
    - Các phép tính liên tiếp
+   - Xem lịch sử tính toán bằng cuộn chuột hoặc kéo thả

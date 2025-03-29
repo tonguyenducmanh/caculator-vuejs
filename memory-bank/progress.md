@@ -27,8 +27,14 @@ Không có tính năng đang trong quá trình phát triển.
 ## Known Issues
 1. **Functional Limitations**
    - [ ] Chưa hỗ trợ keyboard input
-   - [ ] Không có history các phép tính
    - [ ] Chưa xử lý tất cả edge cases
+
+## Recently Completed
+1. **History Feature**
+   - [x] Hiển thị lịch sử các phép tính
+   - [x] Hỗ trợ cuộn chuột
+   - [x] Tính năng kéo thả để cuộn
+   - [x] UI trực quan với grab cursor
 
 ## Future Enhancements
 1. **High Priority**
@@ -37,9 +43,9 @@ Không có tính năng đang trong quá trình phát triển.
    - [ ] Thêm animations cho UI
 
 2. **Medium Priority**
-   - [ ] Thêm history phép tính
    - [ ] Mở rộng số chức năng
    - [ ] Thêm unit tests
+   - [ ] Thêm animations cho các thao tác kéo thả
 
 3. **Low Priority**
    - [ ] Tối ưu performance
