@@ -1,0 +1,59 @@
+# Cline Rules for iPhone Calculator Clone
+
+## Project Patterns
+
+### 1. Component Naming
+- Prefix: 'TD' cho tất cả components
+- Suffix: Mô tả chức năng chính (Main, Control, Result, Button)
+
+### 2. State Management
+- Tất cả state được quản lý tại TDMain.vue
+- Sử dụng Vue Data Properties
+- Không dùng global state management
+
+### 3. Event Handling
+- Events được emit từ dưới lên (Button -> Control -> Main)
+- Xử lý logic tập trung tại TDMain.vue
+
+### 4. Configuration
+- Cấu hình nút được định nghĩa trong controlConfig.js
+- Enums được tập trung trong enumeration.js
+
+## Code Style
+
+### 1. File Structure
+- Components trong thư mục /components
+- Config trong thư mục /config
+- Enums trong thư mục /enums
+
+### 2. CSS
+- Sử dụng class prefix 'td-'
+- CSS scoped trong mỗi component
+- Variables được định nghĩa global
+
+### 3. Vue Conventions
+- Methods đặt tên theo chức năng (type*, remove*, etc.)
+- Props được định nghĩa rõ ràng với validation
+- Comments cho methods phức tạp
+
+## Project Intelligence
+
+### 1. Dependencies
+- Vue 3: Framework chính
+- Vite: Build tool
+- ESLint & Prettier: Code formatting
+
+### 2. Development Workflow
+- Chạy dev server: `npm run dev`
+- Format code: `npm run format`
+- Lint code: `npm run lint`
+
+### 3. Important Constraints
+- Giới hạn 6 chữ số
+- Xử lý số thập phân auto-format
+- sessionStorage cho persistence
+
+### 4. Edge Cases
+- Chia cho 0: Cần xử lý
+- Overflow: Giới hạn số chữ số
+- Số thập phân: Format tự động
