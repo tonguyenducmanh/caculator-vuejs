@@ -3,6 +3,8 @@ tính iphone clone */
 <template>
   <div class="td-main">
     <div class="td-caculator">
+      <!-- phần lịch sử tính toán -->
+      <TDHistory :history="history" />
       <!-- phần màn hình kết quả -->
       <TDResult :finalResult="state == enumeration.state.typeOne ? prevNumber : nextNumber" />
       <!-- phần nút bấm -->
@@ -13,13 +15,15 @@ tính iphone clone */
 <script>
 import TDControl from '@/components/TDControl.vue'
 import TDResult from '@/components/TDResult.vue'
+import TDHistory from '@/components/TDHistory.vue'
 import enumeration from '@/enums/enumeration.js'
 
 export default {
   name: 'TDMain',
   components: {
     TDResult,
-    TDControl
+    TDControl,
+    TDHistory
   },
   data() {
     return {
@@ -27,7 +31,8 @@ export default {
       prevNumber: 0, // số thứ nhất của phép tính
       nextNumber: 0, // số thứ hai của phép tính
       state: enumeration.state.typeOne, // trạng thái của máy tính : 0 là đang nhập số thứ nhất, 1 là đang nhập số thứ 2
-      calculationSign: enumeration.calculationSign.NotSet // dấu của phép tính hiện tại
+      calculationSign: enumeration.calculationSign.NotSet, // dấu của phép tính hiện tại
+      history: [] // lịch sử các phép tính
     }
   },
   mounted() {},
@@ -37,6 +42,12 @@ export default {
     let lastResult = sessionStorage.getItem('tdCaculateResult')
     if (lastResult) {
       me.prevNumber = Number(lastResult)
+    }
+
+    // Lấy lịch sử từ localStorage
+    let savedHistory = localStorage.getItem('tdCalculatorHistory')
+    if (savedHistory) {
+      me.history = JSON.parse(savedHistory)
     }
   },
   methods: {
@@ -105,26 +116,48 @@ export default {
     typeCalulate() {
       // lấy ra số thứ nhất số thứ 2 và thực hiện tính toán
       let me = this
+      let result = me.prevNumber
+      let expression = `${me.prevNumber}`
+
       switch (me.calculationSign) {
         case enumeration.calculationSign.Plus:
-          me.prevNumber = me.prevNumber + me.nextNumber
-          me.nextNumber = 0
+          result = me.prevNumber + me.nextNumber
+          expression += ` + ${me.nextNumber}`
           break
         case enumeration.calculationSign.Minus:
-          me.prevNumber = me.prevNumber - me.nextNumber
-          me.nextNumber = 0
+          result = me.prevNumber - me.nextNumber
+          expression += ` - ${me.nextNumber}`
           break
         case enumeration.calculationSign.Multiple:
-          me.prevNumber = me.prevNumber * me.nextNumber
-          me.nextNumber = 0
+          result = me.prevNumber * me.nextNumber
+          expression += ` × ${me.nextNumber}`
           break
         case enumeration.calculationSign.Divide:
-          me.prevNumber = me.prevNumber / me.nextNumber
-          me.nextNumber = 0
+          result = me.prevNumber / me.nextNumber
+          expression += ` ÷ ${me.nextNumber}`
           break
         default:
           break
       }
+
+      // Thêm vào lịch sử nếu có phép tính hợp lệ
+      if (me.calculationSign !== enumeration.calculationSign.NotSet) {
+        me.history.unshift({
+          expression: expression,
+          result: result
+        })
+
+        // Giới hạn lịch sử 10 phép tính
+        if (me.history.length > 10) {
+          me.history.pop()
+        }
+
+        // Lưu lịch sử vào localStorage
+        localStorage.setItem('tdCalculatorHistory', JSON.stringify(me.history))
+      }
+
+      me.prevNumber = result
+      me.nextNumber = 0
       me.state = enumeration.state.typeOne
     },
     /**
@@ -203,7 +236,7 @@ export default {
   background-color: black;
   color: white;
   width: 380px;
-  height: 600px;
+  height: 720px;
   border-radius: var(--border-radius);
   display: flex;
   flex-direction: column;

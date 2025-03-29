@@ -35,8 +35,25 @@ export default {
   align-items: center;
   justify-content: end;
   padding: 10px;
+  overflow-x: auto;
 }
+
+.td-result::-webkit-scrollbar {
+  height: 4px;
+}
+
+.td-result::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.td-result::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
 .td-result-number {
   font-size: 60px;
+  white-space: nowrap;
+  padding: 0 10px;
 }
 </style>
