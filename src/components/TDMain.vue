@@ -57,7 +57,6 @@ export default {
      */
     typeNumber(value) {
       let me = this
-      // chỉ cho phép nhập tối đa 6 số
       // kiểm tra xem hiện tại đang nhập số thứ nhất hay số thứ 2
       if (value && me.state == enumeration.state.typeOne) {
         me.prevNumber = me.concatNumber(value, me.prevNumber)

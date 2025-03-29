@@ -2,7 +2,7 @@
 caculator clone */
 <template>
   <div class="td-result" @click="removeOneChar">
-  <div class="td-result-number" :style="{ fontSize: calculateFontSize }">{{ finalResult }}</div>
+  <div class="td-result-number" :style="{ fontSize: calculateFontSize }">{{ formattedResult }}</div>
   </div>
 </template>
 <script>
@@ -17,6 +17,10 @@ export default {
   mounted() {},
   created() {},
   computed: {
+    formattedResult() {
+      // Format số lớn với dấu phẩy phân cách hàng nghìn
+      return this.finalResult.toLocaleString('en-US');
+    },
     calculateFontSize() {
       const numLength = this.finalResult.toString().length;
       if (numLength > 9) {
