@@ -147,8 +147,8 @@ export default {
           result: result
         })
 
-        // Giới hạn lịch sử 10 phép tính
-        if (me.history.length > 10) {
+        // Giới hạn lịch sử 100 phép tính
+        if (me.history.length > 100) {
           me.history.pop()
         }
 
