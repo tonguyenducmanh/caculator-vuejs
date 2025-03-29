@@ -30,7 +30,7 @@ export default {
 .td-result {
   position: relative;
   width: 100%;
-  height: 20%;
+  height: 15%;
   display: flex;
   align-items: center;
   justify-content: end;
